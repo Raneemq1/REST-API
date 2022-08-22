@@ -1,4 +1,4 @@
-package com.example.resttrain
+package com.example.rest_train
 
 import org.junit.Test
 

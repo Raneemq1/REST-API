@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.resttrain">
+    package="com.example.rest_train">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
@@ -15,7 +15,7 @@
         android:theme="@style/Theme.REST_Train"
         tools:targetApi="31">
         <activity
-            android:name="com.example.resttrain.view.ui.MainActivity"
+            android:name="com.example.rest_train.view.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
