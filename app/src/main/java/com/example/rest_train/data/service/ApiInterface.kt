@@ -1,10 +1,9 @@
 package com.example.rest_train.data.service
 
 import com.example.rest_train.data.model.Post
+import com.example.rest_train.data.model.PostData
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiInterface {
     /**
@@ -19,4 +18,11 @@ interface ApiInterface {
 
     @GET("posts/{id}")
     fun getPostPath(@Path("id") userId:Int): Call<Post>
+
+
+    /**
+     * Create post method to store new object
+     */
+    @POST("posts")
+    fun storePost(@Body post:PostData):Call<PostData>
 }

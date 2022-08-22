@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rest_train.R
 import com.example.rest_train.data.model.Post
+import com.example.rest_train.data.model.PostData
 import com.example.rest_train.data.service.ApiInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var titleText: TextView
     private lateinit var titleText2: TextView
+    private lateinit var titlePost: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         titleText = findViewById(R.id.titleText)
         titleText2 = findViewById(R.id.titleText2)
+        titlePost = findViewById(R.id.titlePost)
 
+        /**
+         * Create post instance
+         */
+        val post: PostData = PostData(2, "The invisible guest", "Hello I suggest this movie to u")
 
         /**
          * Initialize retrofit builder
@@ -60,11 +67,11 @@ class MainActivity : AppCompatActivity() {
          */
         call.enqueue(object : Callback<List<Post>> {
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                titleText.text=response.body()?.get(2)?.title
+                titleText.text = response.body()?.get(2)?.title
             }
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-               titleText.text=t.toString()
+                titleText.text = t.toString()
             }
 
         })
@@ -74,13 +81,31 @@ class MainActivity : AppCompatActivity() {
          * onResponse display the post title
          * onFailure  display the failure message
          */
-        call1.enqueue(object:Callback<Post>{
+        call1.enqueue(object : Callback<Post> {
             override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                titleText2.text=response.body()?.title
+                titleText2.text = response.body()?.title
             }
 
             override fun onFailure(call: Call<Post>, t: Throwable) {
-                titleText2.text=t.toString()
+                titleText2.text = t.toString()
+            }
+
+        })
+
+
+        /**
+         * Initialize call instance for storing new post
+         */
+
+        val callPost: Call<PostData> = apiInterface.storePost(post)
+
+        callPost.enqueue(object : Callback<PostData> {
+            override fun onResponse(call: Call<PostData>, response: Response<PostData>) {
+                titlePost.text = response.body()?.title
+            }
+
+            override fun onFailure(call: Call<PostData>, t: Throwable) {
+                titlePost.text = t.toString()
             }
 
         })

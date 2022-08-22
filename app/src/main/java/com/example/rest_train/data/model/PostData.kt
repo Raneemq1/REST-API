@@ -1,4 +1,6 @@
 package com.example.rest_train.data.model
 
-class PostData {
+data class PostData ( val userId: Int, val title: String, val body: String) {
+    constructor() : this(0, "", "")
+
 }
